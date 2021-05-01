@@ -399,11 +399,16 @@ class TargetQuality:
                 "--enable-order-hint=0",
                 "--enable-flip-idtx=0",
                 "--enable-dist-wtd-comp=0",
-                "--enable-rect-tx=0",
                 "--enable-interintra-wedge=0",
                 "--enable-onesided-comp=0",
                 "--enable-interintra-comp=0",
                 "--enable-global-motion=0",
+                "--max-reference-frames=3",
+                "--cdf-update-mode=2",
+                "--deltaq-mode=0",
+                "--sb-size=64",
+                "--arnr-strength=6",
+                "--enable-restoration=0",
                 "--min-partition-size=32",
                 "--max-partition-size=32",
             ]
@@ -447,9 +452,6 @@ class TargetQuality:
         elif encoder == "vpx":
             params = [
                 "vpxenc",
-                "-b",
-                "10",
-                "--profile=2",
                 "--passes=1",
                 "--pass=1",
                 "--codec=vp9",
