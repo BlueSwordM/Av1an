@@ -82,7 +82,7 @@ class TargetQuality:
         vmaf_cq = []
         frames = chunk.frames
 
-        if self.probing_rate not in (1, 2):
+        if self.probing_rate not in (1, 2, 3):
             self.probing_rate = self.adapt_probing_rate(self.probing_rate, frames)
 
         if self.probes < 3:
@@ -394,7 +394,6 @@ class TargetQuality:
                 "--enable-intrabc=0",
                 "--enable-angle-delta=0",
                 "--reduced-tx-type-set=1",
-                "--enable-dual-filter=0",
                 "--enable-intra-edge-filter=0",
                 "--enable-order-hint=0",
                 "--enable-flip-idtx=0",
@@ -403,12 +402,11 @@ class TargetQuality:
                 "--enable-onesided-comp=0",
                 "--enable-interintra-comp=0",
                 "--enable-global-motion=0",
+                "--enable-cdef=0",
                 "--max-reference-frames=3",
                 "--cdf-update-mode=2",
                 "--deltaq-mode=0",
                 "--sb-size=64",
-                "--arnr-strength=6",
-                "--enable-restoration=0",
                 "--min-partition-size=32",
                 "--max-partition-size=32",
             ]
@@ -472,27 +470,25 @@ class TargetQuality:
                 f"{n_threads}",
                 "--preset",
                 "8",
-                "-q",
+                "--keyint",
+                "240",
+                "--crf",
                 f"{q}",
                 "--tile-rows",
                 "1",
                 "--tile-columns",
                 "2",
-                "--hme",
-                "0",
                 "--pred-struct",
                 "0",
                 "--sg-filter-mode",
                 "0",
                 "--enable-restoration-filtering",
                 "0",
-                "--cdef-level",
-                "0",
                 "--disable-dlf",
                 "0",
-                "--mrp-level",
+                "--cdef-level",
                 "0",
-                "--enable-tpl-la",
+                "--mrp-level",
                 "0",
                 "--enable-mfmv",
                 "0",
@@ -517,8 +513,6 @@ class TargetQuality:
                 "--bipred-3x3",
                 "0",
                 "--compound",
-                "0",
-                "--use-default-me-hme",
                 "0",
                 "--ext-block",
                 "0",
