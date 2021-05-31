@@ -39,13 +39,15 @@ def create_vs_file(temp: Path, source, chunk_method):
         cache_file = (temp / "split" / "cache.ffindex").resolve()
         script = (
             "from vapoursynth import core\n"
-            'core.ffms2.Source(r"{}", cachefile="{}").set_output()'
+            "core.max_cache_size=2048\n"
+            'core.ffms2.Source(r"{}", cachefile="{}", threads=2).set_output()'
         )
     else:
         cache_file = (temp / "split" / "cache.lwi").resolve().as_posix()
         script = (
             "from vapoursynth import core\n"
-            'core.lsmas.LWLibavSource(r"{}", cachefile="{}").set_output()'
+            "core.max_cache_size=2048\n"
+            'core.lsmas.LWLibavSource(r"{}", cachefile="{}", threads=2).set_output()'
         )
 
     with open(load_script, "w+", encoding='utf-8') as file:
