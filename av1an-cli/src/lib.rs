@@ -488,6 +488,16 @@ pub struct CliOpts {
   /// If not specified, the default value is used (chosen per encoder).
   #[clap(long, help_heading = "TARGET QUALITY")]
   pub max_q: Option<u32>,
+
+  /// Percentile weighting for target-quality
+  ///
+  /// Percentile weighting of the lowest quality frames according to target-quality used for targeting the
+  /// specified quality. A lower number allows for higher quality selections, but may overshoot in bitrate.
+  ///
+  /// Specified in a decimal way: 0.01, 0.05, 0.10. 0.25, 0.50, etc.
+  /// If not specified, the default value of 0.25, or the 25th percentile of the lowest quality frames are used.
+  #[clap(long, help_heading = "TARGET QUALITY")]
+  pub percentile: Option<u32>,
 }
 
 fn confirm(prompt: &str) -> io::Result<bool> {
